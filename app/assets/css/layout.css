@@ -1,0 +1,194 @@
+/* ------------------------------------------------------------
+   Turnly – Dashboard shell (sidebar + main)
+   Same white / indigo theme as the log in and sign up page.
+------------------------------------------------------------ */
+.shell {
+  /* Theme tokens (same values as auth.css) */
+  --brand: #000000;
+  --brand-hover: #272B36;
+  --brand-soft: #f5f6ff;
+  --ink: #0f172a;
+  --text: #475569;
+  --muted: #64748b;
+  --line: #e8ebf2;
+  --surface: #f4f5fa;
+  --page: #f6f7fb;
+  --white: #ffffff;
+  --font-head: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  display: flex;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: var(--page);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* SIDEBAR */
+.side {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 20px;
+  background: var(--white);
+  border-right: 1px solid var(--line);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+/* BRAND */
+.brand {
+  display: block;
+  margin-bottom: 40px;
+  font-family: var(--font-head);
+  font-size: 20px;
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: color 0.5s ease, transform 0.5s ease;
+}
+
+.brand:hover {
+  color: var(--brand);
+  transform: translateX(3px);
+}
+
+/* NAVIGATION */
+.side nav {
+  display: grid;
+  gap: 10px;
+}
+
+.side nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-body);
+
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+}
+
+/* ICON SIZING */
+.side nav a svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+/* HOVER EFFECT */
+.side nav a:hover {
+  background: var(--surface);
+  color: var(--ink);
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+/* ACTIVE LINK */
+.side nav a.active {
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* ACTIVE LINK HOVER */
+.side nav a.active:hover {
+  background: var(--brand-hover);
+  color: #fff;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.7);
+  transform: translateX(5px);
+}
+
+/* KEYBOARD ACCESSIBILITY */
+.side nav a:focus-visible,
+.brand:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* MAIN CONTENT */
+.main {
+  flex: 1;
+  min-width: 0;
+  min-height: 100vh;
+  padding: 0px;
+  box-sizing: border-box;
+  background: var(--page);
+  color: var(--text);
+  animation: contentFadeIn 0.45s ease both;
+}
+
+.main h1,
+.main h2,
+.main h3 {
+  font-family: var(--font-head);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+/* MAIN CONTENT ENTRANCE */
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .shell {
+    flex-direction: column;
+  }
+
+  .side {
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    margin-bottom: 20px;
+  }
+
+  .side nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .side nav a:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* REDUCE MOTION FOR ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
